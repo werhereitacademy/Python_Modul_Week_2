@@ -1,3 +1,5 @@
+# QUESTION 1:
+
 # 1-Calculate each student's GPA and add it to the dictionary.
 
 ogrenciler_sozluk = {"ogrenci1": {"isim": "John", "soyisim": "Doe", "vize": 85, "final": 78, "sozlu": 90},
