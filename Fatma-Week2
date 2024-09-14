@@ -1,0 +1,47 @@
+# 1-Calculate each student's GPA and add it to the dictionary.
+
+ogrenciler_sozluk = {"ogrenci1": {"isim": "John", "soyisim": "Doe", "vize": 85, "final": 78, "sozlu": 90},
+                     "ogrenci2": {"isim": "Jane", "soyisim": "Smith", "vize": 72, "final": 65, "sozlu": 80},
+                     "ogrenci3": {"isim": "Emily", "soyisim": "Johnson", "vize": 88, "final": 92, "sozlu": 85},
+                     "ogrenci4": {"isim": "Michael", "soyisim": "Williams", "vize": 60, "final": 55, "sozlu": 70},
+                     "ogrenci5": {"isim": "Sarah", "soyisim": "Brown", "vize": 95, "final": 90, "sozlu": 85},
+                     "ogrenci6": {"isim": "David", "soyisim": "Jones", "vize": 78, "final": 82, "sozlu": 75},
+                     "ogrenci7": {"isim": "Daniel", "soyisim": "Garcia", "vize": 84, "final": 85, "sozlu": 80},
+                     "ogrenci8": {"isim": "Sophia", "soyisim": "Miller", "vize": 70, "final": 60, "sozlu": 65},
+                     "ogrenci9": {"isim": "James", "soyisim": "Martinez", "vize": 92, "final": 95, "sozlu": 88},
+                     "ogrenci10": {"isim": "Olivia", "soyisim": "Anderson", "vize": 65, "final": 70, "sozlu": 68},
+                     }
+
+for ogrenci in ogrenciler_sozluk.values():
+    ortalama = ogrenci["vize"]*0.4 + ogrenci["final"]*0.5 + ogrenci["sozlu"]*0.1
+    ogrenci["ortalama"] = round(ortalama,2)   # round() fonksiyonu ile ortalamanin virgulden sonra kac basamakli olmasi gerektigini ayarlariz
+
+
+# 2- Find the student with the highest GPA and print it on the screen.
+
+en_yuksek_ortalama = max(ogrenciler_sozluk.values(), key=lambda x: x["ortalama"]) #key=lambda x: x["ortalama"] kısmı, her bir öğrencinin ortalamasına göre en yüksek değeri bulmamızı sağlar. Buradaki lambda ifadesi, küçük bir anonim (isimsiz) fonksiyondur ve her öğrenci için "ortalama" değerini döndürür.
+print(en_yuksek_ortalama)
+
+
+# 3- Separate each student's name from their surname and store them in a separate tuple and add them to a list.
+
+
+isim_soyisim_tuple_liste = []
+for ogrenci in ogrenciler_sozluk.values():
+    isim_soyisim_tuple = (ogrenci["isim"],ogrenci["soyisim"])
+    isim_soyisim_tuple_liste.append(isim_soyisim_tuple)
+
+
+# 4 - Sort the names in alphabetical order and print the sorted list on the screen.
+
+sorted_list = sorted([isim for isim, soyisim in isim_soyisim_listesi]) 
+print("Alfabetik sıralanmış isimler:", sorted_list)
+
+
+# 5 - Keep students with a GPA below 70 in a cluster (set).
+
+yetmis_alti_ortalama_set = set()
+
+for ogrenci in ogrenciler_sozluk.values():
+    if ogrenci["ortalama"] < 70:
+        yetmis_alti_ortalama_set.add((ogrenci["isim"], ogrenci["soyisim"], ogrenci["vize"],ogrenci["final"],ogrenci["sozlu"], ogrenci["ortalama"]))
