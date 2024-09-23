@@ -26,30 +26,31 @@ import os
 custID = 0
 
 # this is a examble dictionary.
-# customer = {
-#     1 :{
-#         "customerID":1,
-#         "firstname":"firstname",
-#         "surname":"surname", 
-#         "telnumber":190,
-#         "adres":"adres",
-#         "email":"ga@ff.com"
-#         },
-#     2 :{
-#         "customerID":2,
-#         "firstname":"firstname",
-#         "surname":"surname", 
-#         "telnumber":13,
-#         "adres":"adres",
-#         "email":"ggg@fh.com",
-#         }
-# }
-customer = {}
+customer = {
+    1 :{
+        "customerID":1,
+        "firstname":"firstname",
+        "surname":"surname", 
+        "telnumber":190,
+        "adres":"adres",
+        "email":"ga@ff.com"
+        },
+    2 :{
+        "customerID":2,
+        "firstname":"firstname",
+        "surname":"surname", 
+        "telnumber":13,
+        "adres":"adres",
+        "email":"ggg@fh.com",
+        }
+}
+#customer = {}
 
 def addNewCustomer(firstname ,surname,telnumber,email,adres)-> None:
         
-        global custID
-        custID += 1 
+        global custID   # Since it is a global variable, I need to call it globally again here so that I don't get an error.
+        custID += 1    # The first value was "0", here I automatically give a new number to each record.
+        
         customer[custID]= {
         
         "customerID": custID,
@@ -63,32 +64,61 @@ def addNewCustomer(firstname ,surname,telnumber,email,adres)-> None:
         
         print(f"Customer with ID {custID} has been added.")
 
-def updateCustomerInformation(custID, n_firstname :None,n_surname : None,n_telnumber:None,n_email:None,n_adres :None)-> None:
+def updateCustomerInformation(custID, n_firstname :None,n_surname : None,n_telnumber:None,n_email,n_adres)-> None:
     
-        customer[custID]['firstname'] = n_firstname
-        customer[custID]['surname'] = n_surname
-        customer[custID]['telnumber'] = n_telnumber
-        customer[custID]['email'] = n_email
-        customer[custID]['adres'] = n_adres
+    #We should open an if block here and specify "is not none" as a condition.
+    #  Because if the user does not want to change the old information,
+    #  the old information will be preserved as if it was up to date.
+
+    # if  n_firstname is not None :
+            #customer[custID]['firstname'] = n_firstname
+
+    
+        customer[custID] ={
+        
+        "customerID": custID,
+        "firstname": n_firstname,
+        "surname": n_surname ,
+        "telnumber": n_telnumber,
+        "adres": n_adres,
+        "email": n_email
+        
+        }
+        
 
 
-def deleteCustomer():
-    pass
+        # customer[custID]['firstname'] = n_firstname
+        # customer[custID]['surname'] = n_surname
+        # customer[custID]['telnumber'] = n_telnumber
+        # customer[custID]['email'] = n_email
+        # customer[custID]['adres'] = n_adres
 
+
+def deleteCustomer(ID):
+
+    if ID in customer.keys():
+        dlt = customer.pop(ID)
+        print(F"\n {dlt} is deleted in coustomers list \n ")
+
+    else :
+        print(F"{ID} is not contain in customers\n")
 
 def listAllCustomers():
    print(customer)
 
+
+# If there is no ID in the list, the loop repeats until the correct ID is given.
 def IDcheck(ID:int)-> int:
 
     while ID not in customer:
         
-        print("Customer ID is not found in the system.")
+        print(F"Customer {ID} is not found in the system.\n")
+        print(F"{customer}  Choise here one ID")
         ID = int(input(" Enter your again customer ID number : "))
         
     else :
        
-        print("Customer ID found in the system.")
+        print(F"Customer {ID} found in the system.")
         print(customer[ID])
         return ID
         
@@ -125,6 +155,7 @@ def mainMenu():
             
 
         if select == "2" :
+
             custID = int( input(" Enter your customer ID number : "))
             ID = IDcheck(custID)
 
@@ -138,14 +169,17 @@ def mainMenu():
             
 
         if select == "3":
-            pass
+            
+            custID = int( input(" Enter your customer ID number : "))
+            ID = IDcheck(custID)
+            deleteCustomer(ID)
 
         if select == "4" :
             listAllCustomers()
 
 
         if select == "5":
-            break
+            checkOut()
         
 
 

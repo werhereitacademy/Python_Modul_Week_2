@@ -27,7 +27,11 @@ while i < 2:   #Let each student have their name, surname and grades (Midterm, F
     oral = int(input("Enter your oral : "))
     
 #1-Calculate each student's GPA and add it to the dictionary.
-    student[i] = { "name" : name ,"grades":[midterm,final, oral], "gpa" : ((midterm + final + oral)//3)} # "i" is een uniek number.
+    student[i] = { 
+                  "name" : name ,
+                  "grades":[midterm,final, oral],
+                  "gpa" : ((midterm + final + oral)//3)          # "i" is een uniek number.
+                  } 
  
 else :
     print(student)
@@ -37,6 +41,7 @@ gpa_list = []
 names_list = []
 
 for i in range(1,3):  
+
     gpa_list.append(student[i]["gpa"])
     #It is for test , this mirror de data of k
     #k =student[i]["gpa"]

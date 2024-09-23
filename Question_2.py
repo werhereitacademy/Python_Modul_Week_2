@@ -18,8 +18,8 @@ Basic Functions:
 # """
 
 
-import os.path
-import json
+import os.path     # importing os module 
+import json        # importing json module 
 
 film={}
 # film = {
@@ -55,6 +55,7 @@ def addFilm(fName :str,fDerector: str ,fYear : int, fGenre :str) -> None:
    
 
 def updateFilm(choise :int,fName :None,fDerector: None ,fYear : None, fGenre :None)-> None:
+    
     if choise in film:
 
         if fName is not None:
@@ -68,7 +69,8 @@ def updateFilm(choise :int,fName :None,fDerector: None ,fYear : None, fGenre :No
             film[choise].update({"Genre" :fGenre})
 
         print("An update has been made.")
-        uploodDictJsonFile()
+
+        uploodDictJsonFile()  
 
 def searchFilm(chose):
     if chose in film:
@@ -88,7 +90,8 @@ def removeFilm(chose):
     else :
         print("Item not found.")
 
-def uploodDictJsonFile():
+#This function converts the data in dictionary format to json file format.
+def uploodDictJsonFile():          
 
     with open(file_name,"w") as f_json :
         json.dump(film,f_json,indent=4)
@@ -205,5 +208,6 @@ def mainFilmMenu():
 
 
 
+# It is required to run the specified function automatically when the program is run.
 if __name__ == "__main__":
     mainFilmMenu()
