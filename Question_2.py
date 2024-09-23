@@ -20,14 +20,15 @@ Basic Functions:
 
 import os.path     # importing os module 
 import json        # importing json module 
+from pprint import pprint   # (pretty-print)  This module indents and smooths your output
 
-film={}
-# film = {
-#     "1":{'name': 'John', "Derector": "Tomas","Year":1980,"Genre" : "Trillend" },
-#     "2":{'name': 'John', "Derector": "Tomas","Year":1981 ,"Genre" : "Animasyon" },
-#     "3":{'name': 'John', "Derector": "Tomas","Year":1982 ,"Genre" : "Family" },
-#     "4":{'name': 'John', "Derector": "Tomas","Year":1983 ,"Genre" : "Trillend" }
-# }
+#film={}
+film = {
+    1:{'name': 'John', "Derector": "Tomas","Year":1980,"Genre" : "Trillend" },
+    2:{'name': 'John', "Derector": "Tomas","Year":1981 ,"Genre" : "Animasyon" },
+    3:{'name': 'John', "Derector": "Tomas","Year":1982 ,"Genre" : "Family" },
+    4:{'name': 'John', "Derector": "Tomas","Year":1983 ,"Genre" : "Trillend" }
+}
 
 
 file_name = "Film.json"  # It can also be ".txt"
@@ -73,6 +74,7 @@ def updateFilm(choise :int,fName :None,fDerector: None ,fYear : None, fGenre :No
         uploodDictJsonFile()  
 
 def searchFilm(chose):
+
     if chose in film:
         print (F"{chose} was found {film[chose]}")
     else:
@@ -80,11 +82,14 @@ def searchFilm(chose):
 
 
 def displayFilm():
-    for i in film:
-        print (film[i])
+    
+    pprint(film, indent=4)                 # With this module I will get the output indented and smooth.
+    #print(film)                           # This is an normaly format
+    #print(json.dumps(film, indent=4))     # With this modele I will get the output  in dictionaru format.
     
 
 def removeFilm(chose):
+
     if chose in film:
         del  film["chose"]
     else :
@@ -102,17 +107,17 @@ def checkJsonFile():
     
     if os.path.isfile(file_name):
 
-        print("dosya mevcut.\n")
+        print("\ndosya mevcut.\n")
 
         with open(file_name,"r") as f_json:
             mydict = json.load(f_json)
         print(mydict)
 
     else:
-        print("False, dosya mevcut değil.")
+        print("\nFalse, dosya mevcut değil.")
         with open("Film.json", "w",encoding = 'utf-8') as f_json:
-            print("Dosya olusturuldu.\n")
-            print("Filim ler sozlugumdeki veriler json dosyasina ekleniyor...\n")
+            print("\nDosya olusturuldu.\n")
+            print("\nFilim ler sozlugumdeki veriler json dosyasina ekleniyor...\n")
             json.dump(film,f_json,indent=4)
             
 
