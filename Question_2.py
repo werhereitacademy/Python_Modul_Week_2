@@ -98,7 +98,7 @@ def removeFilm(chose):
 #This function converts the data in dictionary format to json file format.
 def uploodDictJsonFile():          
 
-    with open(file_name,"w") as f_json :
+    with open(file_name,"a") as f_json :
         json.dump(film,f_json,indent=4)
 
 
