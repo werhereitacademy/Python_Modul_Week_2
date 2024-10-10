@@ -96,7 +96,7 @@ def removeFilm(chose):
         print("Item not found.")
 
 #This function converts the data in dictionary format to json file format.
-def uploodDictJsonFile(fileName):          
+def uploodDictJsonFile(file_name):          
 
     with open(file_name,"a") as f_json :
         json.dump(film,f_json,indent=4)
