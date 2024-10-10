@@ -49,7 +49,7 @@ def addFilm(fName :str,fDerector: str ,fYear : int, fGenre :str) -> None:
     
   
    print(F" Your film {fName} input has been made successfully.")
-   uploodDictJsonFile()
+   uploodDictJsonFile(file_name)
    
    
    
@@ -71,7 +71,7 @@ def updateFilm(choise :int,fName :None,fDerector: None ,fYear : None, fGenre :No
 
         print("An update has been made.")
 
-        uploodDictJsonFile()  
+        uploodDictJsonFile(file_name)  
 
 def searchFilm(chose):
 
@@ -96,7 +96,7 @@ def removeFilm(chose):
         print("Item not found.")
 
 #This function converts the data in dictionary format to json file format.
-def uploodDictJsonFile():          
+def uploodDictJsonFile(fileName):          
 
     with open(file_name,"a") as f_json :
         json.dump(film,f_json,indent=4)
