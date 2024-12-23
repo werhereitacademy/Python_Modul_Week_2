@@ -6,7 +6,7 @@ You need to write a Python program to process a student's grades. The program ne
 
 Store information and notes for 10 students using a dictionary. Let each student have their name, surname and grades (Midterm, Final and Oral grades). For example:
 
-![resim](https://github.com/werhereitacademy/week_2/assets/141542413/dc91b4b6-a51c-4f5f-80a3-854d505ce48a)
+![image](https://github.com/user-attachments/assets/0e3f85a4-bf24-4b22-b0ea-f9b3dbda4fc8)
 
 1-Calculate each student's GPA and add it to the dictionary.
 
