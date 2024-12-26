@@ -1,0 +1,371 @@
+# question_1
+
+def info(): 
+    counter = 2
+    counter_name = 1
+    infoDict={}
+    while counter != 0:
+        try:
+            name = input(f"please enter {counter_name}. student's name: ")
+            surname = input(f"please enter {counter_name}. student's surname: ")
+            midterm = int(input(f"please enter {name}'s midterm grade : "))
+            final = int(input(f"please enter {name}'s final grade: "))
+            oralGrade = int(input(f"please enter {name}'s oral grade: "))
+
+            if all( 0 <= num <= 100 for num in (midterm,final,oralGrade)):
+                name_surname = name + " " + surname
+                infoDict[name_surname.title()] = [midterm, final, oralGrade]
+                counter-=1
+                counter_name+=1
+            else:
+                print("please enter a valid grade!")
+
+        except ValueError:
+            print("please enter a number!")
+
+    return infoDict
+
+infoDic = info()
+print(f"1-students and grades: {infoDic} ")
+
+
+def calculate(infoDic): 
+    for key, value in infoDic.items():
+        infoDic[key] = sum(value)//len(value)
+    return infoDic
+GPA = calculate(infoDic)
+maxKey=max(GPA, key=GPA.get)
+print(f"2-The student with the highest GPA: {maxKey}")
+
+
+def nameSurname(GPA):  
+    nameSurnameList =[]
+    for name_surname in GPA.keys():
+        nameSurnameList.append(tuple(name_surname.split()))
+    return nameSurnameList
+
+turpleNameSurname = nameSurname(GPA)
+print(f"3-tuples in the list: {turpleNameSurname}")
+
+
+def sorting(turpleNameSurname): 
+    index = 0
+    sortedList = []
+    for i in range(len(turpleNameSurname)):
+        sortedList.append(turpleNameSurname[i][index])
+    return sortedList
+        
+sortedList = sorting(turpleNameSurname)
+print(f"4-sorted list: {sorted(sortedList)}")
+
+
+def below70(GPA):
+    cluster = []
+    for student, gpa in GPA.items():
+        if gpa < 70:
+            cluster.append(student)
+    return cluster
+
+cluster = below70(GPA)
+print(f"4-Cluster students with a GPA below 70 : {cluster}")
+
+#question 2
+
+import json,os
+
+movies = {}
+
+def addMovie():
+    
+    while True:
+        request = input("Do you want to add a movie? Y/N: ").strip().upper()
+        if request in ("Y","N"):
+            choose = request
+            break
+        else:
+            print("Please select Y or N")
+            
+    while choose == "Y":
+            name = input("please enter the name of the movie: ").strip().title()
+            jear = input(f"please enter the release year of {name}: ").strip().title()
+            director = input(f"please enter the director of {name}: ").strip().title()
+            genre  = input(f"please enter the genre of {name}: ").strip().title()
+
+            movies[name] = dict(jear = jear, director = director, genre = genre)
+            choose2 = input("do you want to add more movies ? Y/N ").strip().upper()
+            if choose2 != "Y":
+                saveMovies()
+
+                break
+    return movies
+
+
+def edit(moviesDict):
+    counter2 = 0
+    while True:
+        if os.path.getsize("movies.json") == 0 or not moviesDict:
+            print("Your movie library is empty.")
+            addMovie()
+            break
+        else:
+            choose = input("Do you want to edit your film library? Y/N: ").strip().upper()
+            if choose == "N":
+                print("Exiting editing mode.")
+                break
+            elif choose == "Y":
+                choose1 = input("\n1-Edit   2-Remove : ")
+                if choose1 == "1":
+                    for movies in moviesDict.keys():
+                        counter2+=1
+                        print(f"{counter2}. {movies}")
+                    counter2 =0        
+
+                    choose1_2 = int(input("please select a movie: "))-1
+                    keysList = list(moviesDict.keys())
+                    movieName = keysList[choose1_2]
+
+                    choose1_3 = input(f"\n1-Edit {movieName}   2-Remove {movieName} :")
+                    if choose1_3 =="1":
+                        for key, value in moviesDict[movieName].items():
+                            counter2 += 1
+                            print(f"{counter2}. {key} : {value}") 
+                        counter2 = 0
+                        choose1_4 = int(input("please select the number you want to edit: "))-1
+                        keysList2 = list(moviesDict[movieName])
+                        movieItemName = keysList2[choose1_4]
+
+                        edit = input(f"1-Edit {movieItemName}   2-Remove {movieItemName} :")
+                        if edit == "1":
+                            edit1 = input(f"edit your choose --> {movieItemName}: ")
+                            moviesDict[movieName][movieItemName] = edit1
+                            print("Changes have been saved.")
+                            saveMovies()
+                            lastChoose = input("your edit has been saved. Do you want to exit ? Y/N: ").strip().upper()
+                            if lastChoose == "Y":
+                                break
+                        elif edit == "2":
+                            print(f"{movieItemName} has been deleted")
+                            moviesDict[movieName][movieItemName] = " "
+                            saveMovies()
+
+                    elif choose1_3 == "2":
+                        print(f"{movieName} has been deleted")
+                        print("Changes have been saved.")
+                        del moviesDict[movieName]
+                        saveMovies()
+                    
+                        
+                elif choose1 == "2":
+                    warning = input("!! Are you sure you want to remove your film library? Y/N: ").strip().upper()
+                    if warning == "Y":
+                        moviesDict.clear()
+                        print("loading ... ")
+                        print("your library has been deleted. ")
+                        addMovie()
+                        saveMovies()
+                        break
+
+def showMovies():
+    showChoose = input("do you want to see your movies library? Y/N: ").strip().upper()
+    if showChoose == "Y":
+        if os.path.getsize("movies.json") == 0:
+            print("your movie library is empty.")
+            addMovie()
+        else:
+            loadMovies()
+    else:
+        addMovie()
+
+                
+
+def loadMovies():
+    if os.path.getsize("movies.json") > 0:
+        with open("movies.json", "r") as file:
+            movies.update(json.load(file))
+            print("\n       -MOVIE LIBRARY-")
+            for key, value in movies.items():
+                print(f"\n{key.upper()}")
+                for key1, value1 in value.items():
+                    print(f"-{key1}: {value1}")
+            print("\n")
+                
+    else:
+        print("No existing movie library found. Starting fresh!")
+
+def saveMovies():
+    with open("movies.json", "w") as file:
+        json.dump(movies, file, indent=4)
+        print("changes have been saved")
+        
+
+loadMovies()
+moviesDict=addMovie()             
+edit(moviesDict)       
+showMovies()             
+
+#question 3
+
+clients={}
+id = 1453
+
+def menu():
+    while True:
+        print("\nPlease choose the action you want to perform.")
+        try:
+            request = int(input("1-)Add a customer 2-)Update customer's information 3-)Delete a customer 4-)List all customers 5-)Exit\nPlease choose a number: "))
+            if 0 < request < 6:
+                break
+            else:
+                print("Please enter a valid number!")
+        except ValueError:
+            print("Please choose a valid number.")
+            
+    functionsDict={
+        1:addCustomer,
+        2:update,
+        3:deleteCustomer,
+        4:viewCostumerList,
+        5:exit
+    }
+    functionsDict[request]()
+
+
+def addCustomer():
+    global clients
+    global id
+    choice = input("Do you want to add a customer? Y/N: ").strip().upper()
+    if choice not in ("Y","N"):
+        print("Please enter a valid input!!")
+        menu()
+    while choice == "Y":
+        
+            Name = input("Please enter the customer's name :").title()
+            Surname = input("Please enter the customer's surname :").title()
+            Mail = input("Please enter the customer's e-mail :")
+            Number = input("Please enter the customer's phone number :")
+            clients[id] = dict(Name = Name, Surname = Surname, Mail = Mail, Number = Number, )
+            id += 1
+            choice1 = input("Do you want to add more customer?  Y/N").strip().upper()
+            if choice1 == "Y":
+                continue
+            else:
+                menu()
+                break
+            
+    if choice == "N":
+        menu() 
+
+def update():
+    global clients
+    counter = 0
+    if clients:
+        for key, value in clients.items():
+            print(f"Customer ID: {key}")
+            for key, value in value.items():
+                print(f"  {key}: {value}")
+        while True:
+            try:
+                getID = int(input("Please enter the customer's ID: "))
+                if getID not in clients.keys():
+                    print("Not found! Please enter a valid ID!")
+                else:
+                    for key, value in clients[getID].items():
+                        counter += 1
+                        print(f"{counter}:{key}: {value}")
+                    break
+            except ValueError:
+                print("Please enter a valid number!")
+
+        while True:
+            try:        
+                getKey = int(input("please choose a number you want to update: "))-1
+                break
+            except (ValueError,IndexError):
+                print("please enter a valid number!")
+
+        itemsList = list(clients[getID].keys())
+        selected = itemsList[getKey]
+        changes = input(f"{selected}: ")
+        if getKey != 2:
+            changes = changes.title()
+        clients[getID][selected] = changes
+        print("Succesfull! Changes have been saved. \n")
+        menu()
+            
+    else:
+        print("your customer list is empty!")
+        addCustomer()
+
+
+def deleteCustomer():
+    counter = 0
+    global clients
+    if clients:
+        while True:
+            for key, values in clients.items():
+                print(f"Customer ID: {key}")
+                for key, value in values.items():
+                    print(f"  {key}: {value}")
+                try:
+                    getID = int(input("Please enter the customer's ID you want to delete: "))
+                    if getID not in clients.keys():
+                        print("Not found! Please enter a valid ID!")
+                    else:
+                        for key, value in clients[getID].items():
+                            print(f"{key} :{value}")
+                        confirmation = input("\n WARNING! Are you sure you want to delete this costumer's informations ? Y/N: ").strip().upper()
+                        if confirmation == "Y":
+                            del clients[getID]
+                            print("please wait ...")
+                            print("Deletion successful!!")
+                            menu()
+                            break
+                        else:
+                            while True:
+                                try:
+                                    confirmation2 = int(input("1)- < back to menu  2)- enter another ID: "))
+                                    break
+                                except ValueError:
+                                    print("Please enter a valid number!")    
+                            if confirmation2 == 1:
+                                menu()
+                                break
+                            elif confirmation2 ==2:
+                                continue
+                        
+                except ValueError:
+                    print("Please enter a valid number!")
+            
+
+    else:
+        print("Your customer list is allready empty!")
+        addCustomer()
+
+def viewCostumerList():
+    global clients
+    if clients:
+        for key, values in clients.items():
+            print(f"----Customer ID: {key}-----")
+            for key, value in values.items():
+                print(f"{key}: {value}")
+        backToMenu = input("Enter anything to return to the menu: ")
+        if backToMenu:
+            menu()
+        
+    else:
+        print("Your customer list is empty!")
+        menu()
+
+def exit():
+    print("The program is ending...")
+    print("Have a nice day! :)")
+
+menu()
+        
+
+
+
+
+
+
+
