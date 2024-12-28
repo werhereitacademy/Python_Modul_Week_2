@@ -183,7 +183,7 @@ cust={
 }
 lst=["First name:","Sirname:","Email:","Phone number:"]
 key_word=["name","sirname","email","phone"]
-
+nex=2
 while True:
     print("1-Add new customer")
     print("2-Update customer")
@@ -204,7 +204,7 @@ while True:
                 for item in lst:
                     request.append(input(f"{item}"))
                 
-                nex=len(cust)+1
+                nex+=nex
                 cust[nex]={}
                 for index, item in enumerate(key_word):
                     cust[nex][item]=request[index]
