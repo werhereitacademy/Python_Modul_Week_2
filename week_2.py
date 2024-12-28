@@ -215,7 +215,9 @@ while True:
                 while keep_going:
                     cust_id=int(input("Enter the customer ID:"))
                     
-                    if 0<cust_id<=len(cust):
+
+                    
+                    if cust_id in cust:
                         request=[]
 
                         for item in lst:
@@ -257,7 +259,7 @@ while True:
     
             case 4:
                 if len(cust)>0:
-                    for i in range(1,len(cust)+1):
+                    for i in cust:
                         
                         print("-"*30)
                         print(f"Cusmoter ID:{i}\nCustomer name:{cust[i]["name"]}\nCustomer Sirname:{cust[i]["sirname"]}\nEmail:{cust[i]["email"]}\nPhone:{cust[i]["phone"]}\n")
