@@ -78,8 +78,6 @@ def update_customer(customers, customer_id, customers_file):
             save_file(customers_file, customers)
             print(f"Customer {customer['name']} {customer['surname']} updated successfully.")
             return True
-        else:
-            print("Customer not found.")
     return False
 
 def delete_customer(customers, customer_id, customers_file):
