@@ -1,0 +1,136 @@
+# Soru_1'in cevabi:
+
+bilgiler={"Ahmet Yilmaz":[80,90,78],
+          "Mehmet Demir":[92,88,76],
+          "Ayse Kaya":[78,89,95],
+          "Zeynep Celik":[65,70,80],
+          "Ali Kara":[50,60,55],
+          "Fatma Yildiz":[88,85,90],
+          "Murat Aydin":[72,68,74],
+          "Elif Aksoy":[95,90,88],
+          "Hakan Ozturk":[45,50,55],
+          "Canan Tas":[80,75,82],
+}
+#genel not ortalamasi(gpa)
+gpa_liste={}
+for ad_soyad,notlar in bilgiler.items():
+    genel_not=(notlar[0]*0.3)+(notlar[1]*0.5)+(notlar[2]*0.2)
+    gpa_liste[ad_soyad]=genel_not
+
+
+#en yuksek genel not ortalamasina sahip ogrenciyi bulma
+en_yuksek_gpa=-1
+en_yuksek_gpa_ogrenci=""
+for ad_soyad,gpa in gpa_liste.items():
+    if gpa>en_yuksek_gpa:
+        en_yuksek_gpa=gpa
+        en_yuksek_gpa_ogrenci=ad_soyad
+
+#isimleri ve soyisimleri ayirarak liste olusturma
+isim_soyisim_listesi=[]
+for ad_soyad in bilgiler.keys():
+    parcalar=ad_soyad.split()
+    ad=parcalar=[0]
+    soyad=parcalar=[1]
+    isim_soyisim_listesi.append((ad_soyad))
+
+#isimleri alfabetik siraya gore siralama
+siralanmis_isimler=sorted(isim_soyisim_listesi)
+
+#Genel not ortalamasi 70 in altinda olan ogrencileri bir listede toplama
+dusuk_gpa_ogrenci=[]
+for ad_soyad,gpa in gpa_liste.items():
+    if gpa<70:
+        dusuk_gpa_ogrenci.append(ad_soyad)
+
+#sonuclari ekrana yazdirma
+print("\nTum Ogrenciler Ve Genel Not Ortalamalari:")
+for ad_soyad,genel_not in gpa_liste.items():
+    print(f"{ad_soyad}-Genel not:{genel_not:.2f}")
+
+print("\nEn Yuksek Not Ortalamasina Sahip Ogrenci:")
+print(f"{en_yuksek_gpa_ogrenci}-Genel Not:f{en_yuksek_gpa:.2f}")
+
+print("\nIsim ve Soyisimlerin Ayrilmis Hali:")
+print(isim_soyisim_listesi)
+
+print("\nAlfabatik siralanmi isimler:")
+print(siralanmis_isimler)
+
+print("\nGenel Not Ortalamasi 70 in Altindaki ogrenciler:")
+print(dusuk_gpa_ogrenci)
+
+
+#Soru_3'un cevabi:
+
+# Customer Management System
+# storing customer information, adding new customers, updating customer information, deleting customers and viewing the customer list.
+
+customers = {}
+
+while True:
+    print("1. Add New Customer")
+    print("2. Uptade Customer Information")
+    print("3. Delete Customer Information")
+    print("4. List All Customers")
+    print("5. Exit")
+
+    choice = input("Choose Action (1-5) ")
+
+    if choice == "1":
+        id = input("Customer ID: ")
+        if id in customers:
+            print("Already exist")
+        else:
+            name = input("Name: ")
+            surname = input("Surname: ")
+            email = input("E-mail: ")
+            phone_number = input("Phone number: ")
+
+            customers[id] = {"Name": name,
+                             "Surname": surname,
+                             "E-mail": email,
+                             "Phone number": phone_number}
+            print("Successfully added")
+
+    elif choice == "2":
+        id = input("Customer ID: ")
+        if id in customers:
+            print("Customer ID:", customers[id])
+            name = input("New Name: ") or customers[id]["Name"]
+            surname = input("New Surname: ") or customers[id]["Surname"]
+            email = input("New E-mail: ") or customers[id]["E-mail"]
+            phone_number = input("New Phone number: ") or customers[id]["Phone number"]
+
+            customers[id] = {"Name": name,
+                             "Surname": surname,
+                             "E-mail": email,
+                             "Phone number": phone_number}
+            print("Succesfully updated")
+        else:
+            print("Customer not found")
+
+    elif choice == "3":
+        id = input("Customer ID: ")
+        if id in customers:
+            del customers[id]
+            print("Successfully deleted")
+        else:
+            print("Customer not found")
+
+    elif choice == "4":
+        if not customers:
+            print("No customers found.")
+        else:
+            print("\nCustomers List:")
+            for id, info in customers.items():
+                print(
+                    f"ID: {id}, Name: {info['Name']}, Surname: {info['Surname']}, Email: {info['E-mail']}, Phone: {info['Phone number']}")
+
+
+    elif choice == "5":
+        print("Exiting")
+        break
+
+    else:
+        print("Try again")
