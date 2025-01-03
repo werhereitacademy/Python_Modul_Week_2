@@ -1,0 +1,133 @@
+# Ödev 1
+
+ogrenci_bilgileri = {}
+for i in range(11):
+    ogr_adi = input("Öğrenci Adı Soyadı : ")
+    ogr_vize = int(input("Vize Notunu Giriniz : "))
+    ogr_final = int(input("Final Notunu Giriniz : "))
+    ogr_sozlu = int(input("Sozlu Notunu Giriniz : "))
+    ortlama = ogr_vize * .3 + ogr_final * .5 + ogr_sozlu *.2
+    ortlama = round(ortlama,2)
+# görev 1
+    ogrenci_bilgileri[ogr_adi] = {"Vize": ogr_vize, "Final": ogr_final, "Sozlu": ogr_sozlu, "Ortalama": ortlama}
+   
+print(ogrenci_bilgileri)
+# görev 2
+en_yuksek_ogrenci = max(ogrenci_bilgileri, key=lambda ogrenci: ogrenci_bilgileri[ogrenci]["Ortalama"])
+print("En Yüksek Not Ortalaması Alan Öğrenci : " , en_yuksek_ogrenci )
+
+# görev 3
+ogrenci_listesi = ()
+for key in ogrenci_bilgileri:
+    ogrenci_listesi = ogrenci_listesi + (key,)
+
+# görev 4
+print("Sıralı Öğrenci Listesi : ", sorted(ogrenci_listesi))
+
+# görev 5
+dusuk_ortalama_ogrenciler = {ogrenci for ogrenci, bilgiler in ogrenci_bilgileri.items() if bilgiler["Ortalama"] < 70}
+print("Ortalaması Düşük Öğrenciler : ", dusuk_ortalama_ogrenciler)
+
+#ödev 2
+menu = " FİLM TAKİP PROGRAMI \n 1. Kayıt \n 2. Değiştirme \n 3. Silme \n 4. Listeleme \n 5. Çıkış"
+film_list = {}
+while True:
+    print(menu)
+    secim = input("Bir Seçim Yapınız : ")
+    if secim.isdigit():
+        secim = int(secim)
+        if secim == 5:
+            break
+        elif secim == 1:
+            film_name = input("Film Adı :")
+            film_director = input("Film Yönetmeni :")
+            film_year = input("Film Yılı :")
+            film_turu = input("Film Türü :")
+            film_list[film_name] = {"Director": film_director,"Year": film_year, "Türü": film_turu}
+        elif secim == 2:
+            film_name = input("Bilgileri Değişecek Film Adı :")
+            if film_name in film_list:
+                film_director = input("Film Yönetmeni :")
+                film_year = input("Film Yılı :")
+                film_turu = input("Film Türü :")
+                film_list[film_name] = {"Director": film_director,"Year": film_year, "Türü": film_turu}
+            else:
+                print(film_name," isimli film listede yok")
+        elif secim == 3:
+            film_name = input("Bilgileri Silinecek Film Adı :")
+            if film_name in film_list:
+                film_list.pop(film_name)
+            else:
+               print(film_name," isimli film listede yok") 
+        elif secim == 4:
+            for k,v in film_list.items():
+                print(k,v )
+        else:
+            continue
+    else:
+         print("\t 1-5 ARASI SAYI GİRİNİZ")
+         continue
+#ödev 3
+# customer
+
+customer = {}
+
+menu = ("MÜŞTERİ YÖNETİMİ","1. Kayıt","2. Değiştirme","3. Silme","4. Listeleme", "5. Çıkış")
+
+while True:
+    for m in menu:
+        print("\t",m)
+    secim = input("Seçim Yapınız : ")
+    if secim == '5':
+        exit()
+    elif secim =='1':
+        if len(customer) > 0:
+            id = max(customer)+1
+        else:
+            id = 1
+        name = input("Enter Customer Name: ")
+        surname = input("Enter Customer Surname: ")
+        email = input("Enter Customer Email: ")
+        phone = input("Enter Customer Phone Number: ")
+        customer[id] = {
+        'Name': name.capitalize(),
+        'Surname': surname.capitalize(),
+        'Email': email,
+        'Phone': phone
+          }
+        print(f"Customer {name} {surname} added successfully.")
+    elif secim =='2':
+        id = int(input("Değişiklik Yapılacak ID : "))
+        if id in customer:
+            print(customer[id]["Name"],"-",customer[id]["Surname"],"-",customer[id]["Email"],"-",customer[id]["Phone"])
+            name = input("Enter Customer Name: ")
+            surname = input("Enter Customer Surname: ")
+            email = input("Enter Customer Email: ")
+            phone = input("Enter Customer Phone Number: ")
+            customer[id] = {
+            'Name': name.capitalize(),
+            'Surname': surname.capitalize(),
+            'Email': email,
+            'Phone': phone
+            }
+        else:
+            print("DEĞİŞİKLİK YAPILACAK ID BULUNAMADI....")
+    elif secim =='3':
+        id = int(input("Silinecek ID : "))
+        if id in customer:
+            customer.pop(id)
+        else:
+            print("SİLİNECEK ID BULUNAMADI.....")
+    elif secim =='4':
+        if not customer:
+            print("Müşteri Listesi Boş")
+        else:
+            for i,v in customer.items():
+                print("------------------------------------")
+                print("Müşteri ID : ", i)
+                print("Müşteri Adı : ", customer[i]["Name"])
+                print("Müşteri SoyAdı : ", customer[i]["Surname"])
+                print("Müşteri Email : ", customer[i]["Email"])
+                print("Müşteri Telefon : ", customer[i]["Phone"])
+    else:
+        continue
