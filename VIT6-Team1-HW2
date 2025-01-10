@@ -1,0 +1,190 @@
+#SORU-1) Store information and notes for 10 students using a dictionary.
+# Let each student have their name, surname and grades (Midterm,
+# Final and Oral grades).
+ogrenciler={
+    "Iclal Ozturk":[100,100,100],
+    "Ahmet Tas":[100,80,88],
+    "Kaya Mert":[55,58,67],
+    'Sertan Alp':[77.5,18,54],
+    'Besir Ada':[76,84,65],
+    "Gurkan Ozturk":[99,100,100],
+    "Ahmet Ipek":[88,86,78.7],
+    "Tunc Mert":[58,58,71],
+    'Sertan Tas':[71,67,86],
+    'Fadime Sahin':[55,67,87]
+}
+#a) Ortalama Hesaplama ve sonuclari kaydetme
+sonuclar={}
+for isim, notlar in ogrenciler.items():
+    vize, final, sozlu=notlar
+    ortalama=(vize*0.3)+(final*0.5)+(sozlu*0.2)
+    sonuclar[isim]=round(ortalama,2)
+for isim,ortalama in sonuclar.items():
+    print(f'{isim} icin ortalama:{ortalama}')
+
+#b) En Yuksek Ortalamasi olan ogrenciyi bulma
+
+en_yuksek_ogrenci=max(sonuclar, key=sonuclar.get)
+en_yuksek_ortalama=sonuclar[en_yuksek_ogrenci]
+
+print(f'\nEn yuksek ortalamaya sahip ogrenci:{en_yuksek_ogrenci}, Ortalama:{en_yuksek_ortalama}')
+
+#c)Her öğrencinin adını soyadından ayırıp ayrı bir tuple'da saklayıp bir listeye ekleme
+ogrenci_adlari=[(isim.split()[0],) for isim in ogrenciler.keys()]
+print(ogrenci_adlari)
+
+#d)İsimleri alfabetik sıraya göre sıralayın ve sıralanmış listeyi ekrana yazdır
+alfabetik_sira=sorted([(isim.split()[0],) for isim in ogrenciler.keys()])
+print(alfabetik_sira)
+
+#e)Not ortalaması 70'in altında olan öğrencileri bir kümede tutma:
+ortalama_70_alti=set()
+for isim,notlar in ogrenciler.items():
+    vize, final, sozlu = notlar
+    ortalama=(vize*0.3)+(final*0.5)+(sozlu*0.2)
+    if ortalama<70:
+        ortalama_70_alti.add(isim)
+print('ortalamalari 70\'in altinda olan ogrenciler:')
+print(ortalama_70_alti,)
+
+#Film Kütüphanesi Yönetim Sistemi Projesi
+film_kutuphane={}
+def film_ekle():
+    """Yeni bir film ekle"""
+    film_adi= input('Film Adi:')
+    if film_adi in film_kutuphane:
+        print('Bu film kutuphanenizde var')
+        return
+    yonetmen=input('Yonetmen:')
+    cikis_yili=input('Cikis Yili:')
+    tur=input('Tur:')
+    basrol_oyunculari=input('Basrol Oyunculari:')
+    imdb_puani=input('IMDB Puani:')
+    izleyici_yorumu=input('Izleyici Yorumu:')
+#Filmin Sozluge eklemek:
+    film_kutuphane[film_adi]={
+        'Yonetmen': yonetmen,
+        'Cikis Yili': cikis_yili,
+        'Tur': tur,
+        'Basrol Oyunculari': basrol_oyunculari,
+        'IMDB Puani':imdb_puani,
+        'Izleyici Yorumu': izleyici_yorumu
+    }
+    print(f"'{film_adi}' kutuphaneye eklendi.\n")
+def film_sil():
+    """bir filmi sil"""
+    film_adi=input('Silmek istediginiz filmi giriniz:')
+    if film_adi in film_kutuphane:
+        del film_kutuphane[film_adi]
+        print(f"'{film_adi}' kutuphaneden silindi.\n")
+    else:
+        print(f"'{film_adi}, adli film kutuphanede bulunamadi.\n")
+def film_goster():
+    """Kutuphanedeki Tum Filmleri Goster"""
+    if not film_kutuphane:
+        print("Kutuphanenizde hic film yok.\n")
+        return
+    print("Kutupnanenizdeki Filmler:")
+    for film,detaylar in film_kutuphane.items():
+        print(f"\nFilm Adi: {film}")
+        for anahtar, deger in detaylar.items():
+            print(f"{anahtar}:{deger}")
+    print()
+def menu():
+    """Kullaniciya Secenekler Sunma"""
+    while True:
+        print('1. Film Ekle')
+        print('2. Film Sil')
+        print('3. Kutuphaneyi Goster')
+        print('4. Cikis')
+        secim=input('Bir Secenek Secin(1-4):')
+        if secim=='1':
+            film_ekle()
+        elif secim=='2':
+            film_sil()
+        elif secim=='3':
+            film_goster()
+        elif secim=='4':
+            print('Cikis Yapiliyor...')
+            break
+        else:
+            print('Gecersiz Secim. Tekrar Deneyiniz.\n')
+#Sistemi baslatma
+menu()
+
+#Musteri Yonetim Sistemi
+musteriler={}
+def musteri_ekle():
+    #Yeni musteri ekleme
+    musteri_id=input('musteri ID (benzersiz):')
+    if musteri_id in musteriler:
+        print('Bu ID zaten mevcut. Baska bir ID giriniz.\n')
+        return
+    ad=input('Ad:')
+    soyad=input('Soyad:')
+    eposta=input('E-Posta:')
+    telefon=input("Telefon Numarasi:")
+    #Bilgileri Sozluge ekleme:
+    musteriler[musteri_id]={
+        'Ad': ad,
+        'Soyad': soyad,
+        'E-Posta': eposta,
+        'Telefon Numarasi': telefon
+    }
+    print('Musteri basariyla kaydedildi.')
+def musteri_guncelle ():
+    musteri_id=input("Guncellemek istediginiz musteri ID'sini girin:")
+    if musteri_id not in musteriler:
+        print("Bu ID'ye sahip musteri bulunamadi.")
+        return
+    print("Mevcut bilgileri guncellemek icin bos birakabilirsiniz")
+    ad=input(f"Ad[{musteriler[musteri_id]['Ad']}]:") or musteriler[musteri_id]['Ad']
+    soyad=input(f"Soyad[{musteriler[musteri_id]['Soyad']}]:") or musteriler[musteri_id]['Soyad']
+    eposta=input(f"E-posta [{musteriler[musteri_id]['E-Posta']}]:") or musteriler[musteri_id]['E-posta']
+    telefon = input(f"Telefon Numarasi [{musteriler[musteri_id]['Telefon Numarasi']}]:") or musteriler[musteri_id]['Telefon Numarasi']
+    musteriler[musteri_id]= {
+        'Ad': ad,
+        'Soyad': soyad,
+        'E-posta': eposta,
+        'Telefon Numarasi': telefon
+    }
+    print('Musteri bilgileri guncellendi.')
+def musteri_sil ():
+    musteri_id=input('Silmek istediginiz musteri ID\'sini girin:')
+    if musteri_id in musteriler:
+        del musteriler[musteri_id]
+        print('Musteri basariyla silindi')
+    else:
+        print('Bu ID\'ye sahip musteri bulunamadi')
+def musteri_listele ():
+    if not musteriler:
+        print('Musteri kaydi bulunamadi.')
+        return
+    print("\nTum Musteriler:")
+    for musteri_id, bilgiler in musteriler.items():
+        print(f"ID: {musteri_id} Ad:{bilgiler['Ad']} Soyad: {bilgiler['Soyad']} E-posta{bilgiler['E-posta']} Telefon Numarasi: {bilgiler['Telefon Numarasi']}")
+    print()
+def menu ():
+        while True:
+            print("\nMusteri Yonetim Sistemi")
+            print("1. Yeni Musteri Ekle")
+            print("2. Musteri Bilgilerini Guncelle")
+            print("3. Musteri Sil")
+            print("4. Tum Musterileri Listele")
+            print("5. Cikis")
+            secim=input("Seciminiz:")
+            if secim =="1":
+                musteri_ekle()
+            elif secim== "2":
+                musteri_guncelle ()
+            elif secim== "3":
+                musteri_sil ()
+            elif secim=="4":
+                musteri_listele ()
+            elif secim== "5":
+                print("Cikis yapiliyor...")
+                break
+            else:
+                print("Gecersiz secim, Tekrar deneyin")
+# program baslat
+menu()
