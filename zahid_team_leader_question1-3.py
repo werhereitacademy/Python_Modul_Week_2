@@ -20,4 +20,4 @@ for full_name in students.keys():
     first_name, last_name = full_name.split()
     name_surname_list.append((first_name, last_name))
 
-print(name_surname_list)
+print(name_surname_list) 
