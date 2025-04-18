@@ -1,4 +1,4 @@
-#Question 3
+#Question3
 customers_information={}
 
 def display_menu():
