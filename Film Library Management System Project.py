@@ -3,7 +3,7 @@ import json
 
 # Question 4: Restore the movie data when the program starts
 try:
-    with open("movies.json", "r") as file:
+    with open("mov.json", "r") as file:
         movie_library = json.load(file)
 except FileNotFoundError:
     movie_library = []
@@ -42,7 +42,7 @@ def view_movies():
 
 # Question 4: Save the movie data in a file
 def save_to_file():
-    with open("movies.json", "w") as file:
+    with open("mov.json", "w") as file:
         json.dump(movie_library, file, indent=4)
 
 # Question 1: Create a movie dictionary with user input
