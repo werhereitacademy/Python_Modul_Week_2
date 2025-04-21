@@ -1,5 +1,5 @@
 students ={}
-for i in range (0,3):
+for i in range (1,11):
     student = {input("Name, Surname? "):[int(input("midterm ")),int(input("final ")), int(input("oral "))]}
     students.update(student)
     print(students)
@@ -12,7 +12,7 @@ for i in students:
 avg=[((students[i])[-1]) for i in students]
 for i in students:
     if (students[i])[-1]==max(avg):
-        print("Biggest average grade: ",i, ",", max(avg))
+        print("Highest average grade: ",i, ",", max(avg))
 Names=[]
 for i in list(students.keys()):
     i.split(" ")[0]
