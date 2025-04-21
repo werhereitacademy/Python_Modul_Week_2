@@ -54,4 +54,4 @@ for i in students:
 
     Unseccesfull.add(i)
 
-print("Unseccedfull students: ",Unseccesfull)
+print("Unseccesfull students: ",Unseccesfull)
