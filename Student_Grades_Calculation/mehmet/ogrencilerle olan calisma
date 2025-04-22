@@ -1,0 +1,47 @@
+students = {
+    'Ahmet Yilmaz': [85, 90, 78],
+    'Mehmet Demir': [92, 88, 76],
+    'Ayse Kaya': [78, 89, 95],
+    'Zeynep Celik': [65, 70, 80],
+    'Ali Kara': [50, 60, 55],
+    'Fatma Yildiz': [88, 85, 90],
+    'Murat Aydin': [72, 68, 74],
+    'Elif Aksoy': [95, 90, 88],
+    'Hakan Ozturk': [45, 50, 55],
+    'Canan Tas': [80, 75, 82]
+}
+
+# GPA'leri tutmak icin yeni bir sozluk
+gpa_dict = {}
+
+# GPA hesapla ve her ogrenciye ekle
+for isim, notlar in students.items():
+    vize = notlar[0]
+    final = notlar[1]
+    sozlu = notlar[2]
+
+    gpa = (vize * 0.3) + (final * 0.5) + (sozlu * 0.2)
+    gpa_dict[isim] = gpa
+
+# En yuksek GPA'li ogrenciyi bul
+en_yuksek_gpa = -1
+en_iyi_ogrenci = ""
+
+for isim, gpa in gpa_dict.items():
+    if gpa > en_yuksek_gpa:
+        en_yuksek_gpa = gpa
+        en_iyi_ogrenci = isim
+
+print("En yuksek GPA'li ogrenci:")
+print(f"{en_iyi_ogrenci} - GPA: {en_yuksek_gpa:.2f}")
+
+# GPA'si 70'ten dusuk olan ogrencileri bir kume (set) icine al
+dusuk_gpa_kumesi = set()
+
+for isim, gpa in gpa_dict.items():
+    if gpa < 70:
+        dusuk_gpa_kumesi.add(isim)
+
+print("\nGPA'si 70'ten dusuk olan ogrenciler:")
+for isim in dusuk_gpa_kumesi:
+    print("- " + isim)
