@@ -1,22 +1,11 @@
 # Python_Modul_Week_2 – Team Plan
 
 ## Team Members:
-- Kürşad (Team Leader)
+- Kürşad
 - Ali
 - Furkan
 - Mehmet Lütfi
 - Mustafa
-
----
-
-## Project 1: Student Grades Calculation
-
-### Görev Dağılımı:
-- **Ali**: input_students.py – Öğrencilerin bilgilerini (isim, soyisim, notlar) alan modül.
-- **Furkan**: calculate_gpa.py – Notlardan ortalama (GPA) hesaplayan fonksiyon.
-- **Mehmet Lütfi**: analyze_gpa.py – En yüksek GPA'yı bulma ve düşük GPA'ları kümeleme.
-- **Mustafa**: sort_and_display.py – İsimleri ayırma, sıralama ve gösterme.
-- **Kürşad**: main.py – Tüm modülleri entegre eder, genel akışı yönetir.
 
 ---
 
