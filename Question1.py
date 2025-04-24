@@ -13,7 +13,7 @@ students = {
 }
 
 # 1. Calculate GPA and add to dictionary
-for name, grades, in students.items():          #We loop through the dictionary and add GPA to each student's info
+for name, grades, in students.items():          #We loop through the dictionary and add GPA to each student's info  ....
     midterm, final, oral = grades
     print(grades)
     print(type(grades))
