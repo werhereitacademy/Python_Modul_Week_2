@@ -29,3 +29,5 @@ for i in students:
    if (students[i])[-1]<70:
         Unseccesfull.add(i)
 print("Unseccesfull students: ",Unseccesfull)
+
+# abi bunu görüyor musun?
