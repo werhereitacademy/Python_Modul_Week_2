@@ -11,12 +11,6 @@
         "genre": "Crime",
         "lead_actor": "Marlon Brando"
     },
-    "Forrest Gump": {
-        "director": "Robert Zemeckis",
-        "release_year": 1994,
-        "genre": "Drama",
-        "lead_actor": "Tom Hanks"
-    },
     "Inception": {
         "director": "Christopher Nolan",
         "release_year": 2010,
