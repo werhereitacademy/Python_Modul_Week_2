@@ -1,6 +1,6 @@
 musteriler = [12345, 23456, 34567]
-bilgileri = [["ahmet Mümtaz", "ahmet@gmail.com", 685001122], ["Fırat Tanış", "fırat@gmail.com", 685112233],
-             ["Taner Birsel", "taner@gmail.com", 685223344]]
+bilgileri = [["ahmet Mümtaz", "ahmet@gmail.com", "0685001122"], ["Fırat Tanış", "fırat@gmail.com", "0685112233"],
+             ["Taner Birsel", "taner@gmail.com", "0685223344"]]
 musteri_bilgi = dict(zip(musteriler, bilgileri))
 
 while True:
@@ -12,7 +12,7 @@ while True:
         if not musteri_bilgi:
           print("Henüz Herhangi Bir Müşteri Girlmemiştir.")
         else:
-           print("Film Deporsunun Güncel Hali: ")
+           print("Film Deposunun Güncel Hali: ")
            for id, info in musteri_bilgi.items():
               print(f"{id} ID numaralı müşterinin, İsmi: {info[0]}, Mail Adresi: {info[1]}, Telefon Numarası: {info[2]}")
 
@@ -48,9 +48,8 @@ while True:
     elif secim == '3':
         if not musteri_bilgi:
             print("Müşteri Listsi Boştur.")
-        print("Düzenlemek İstediğiniz Müşterinin ID'sini Giriniz: ")
+            continue
 
-        secim3 = int(input("GÜncellenecek Müşteri ID'si: "))
         try:
             secim3 = int(input("Güncellenecek Müşteri ID'si: "))
         except ValueError:
@@ -80,7 +79,7 @@ while True:
                 secim4 = int(input("Silmek İstenen Müşteri ID'si: "))
                 if secim4 in musteri_bilgi:
                     onay = input(f"{secim4} ID'li müşteriyi silmek istediğinize emin misiniz? Evet ise 'E' basınız.")
-                    if onay.lower == 'e':
+                    if onay.lower() == 'e':
                         del musteri_bilgi[secim4]
                         print(f"{secim4} ID'li müşteri bilgileri listeden silindi.")
                     else:

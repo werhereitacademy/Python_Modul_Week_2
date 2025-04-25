@@ -81,7 +81,7 @@ while True:
         print("Silmek istediğiniz filmi seçiniz: ")
         film_listesi = list(film_deposu.keys())
         for i, film in enumerate(film_listesi, 1):
-            print(f"{i}, {film}")
+            print(f"{i}- {film}")
 
         try:
             secim3 = int(input("Film Numarasını Giriniz: ")) - 1
