@@ -1,0 +1,23 @@
+[
+    {
+        "movie_ID": "1",
+        "movie_name": "shawshank",
+        "director": "cames cameron",
+        "release_year": "1997",
+        "genre": "drama"
+    },
+    {
+        "movie_ID": "2",
+        "movie_name": "sdf",
+        "director": "rew",
+        "release_year": "5487",
+        "genre": "kokk"
+    },
+    {
+        "movie_ID": "",
+        "movie_name": "",
+        "director": "",
+        "release_year": "",
+        "genre": ""
+    }
+]
