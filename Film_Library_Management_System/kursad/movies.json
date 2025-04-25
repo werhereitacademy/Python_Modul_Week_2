@@ -1,0 +1,32 @@
+{
+    "The Shawshank Redemption": {
+        "director": "Frank Darabont",
+        "release_year": 1994,
+        "genre": "Drama",
+        "lead_actor": "Tim Robbins"
+    },
+    "The Godfather": {
+        "director": "Francis Ford Coppola",
+        "release_year": 1972,
+        "genre": "Crime",
+        "lead_actor": "Marlon Brando"
+    },
+    "Inception": {
+        "director": "Christopher Nolan",
+        "release_year": 2010,
+        "genre": "Sci-Fi",
+        "lead_actor": "Leonardo DiCaprio"
+    },
+    "The Matrix": {
+        "director": "Lana Wachowski, Lilly Wachowski",
+        "release_year": 1999,
+        "genre": "Sci-Fi",
+        "lead_actor": "Keanu Reeves"
+    },
+    "Titanic": {
+        "director": "James Cameron",
+        "release_year": 1997,
+        "genre": "Romance",
+        "lead_actor": "Leonardo DiCaprio"
+    }
+}
