@@ -1,5 +1,5 @@
 students ={}
-for i in range (1,11):
+for i in range (1,3):
     student = {input("Name, Surname? "):[int(input("midterm ")),int(input("final ")), int(input("oral "))]}
     students.update(student)
     print(students)
@@ -28,6 +28,4 @@ Unseccesfull=set(Unseccesfull)
 for i in students:
    if (students[i])[-1]<70:
         Unseccesfull.add(i)
-print("Unseccesfull students: ",Unseccesfull)
-
-# abi bunu görüyor musun?
+print("Unseccesfull students / ",Unseccesfull)
