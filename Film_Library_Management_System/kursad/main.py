@@ -1,6 +1,5 @@
 import json
 import os
-import keyboard
 
 clear_screen = lambda: os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -16,6 +15,7 @@ def update_movies_json(movies_dict, filename=file_path):
     with open(filename, 'w', encoding='utf-8') as file:
         json.dump(movies_dict, file, indent=4, ensure_ascii=False)
 
+# Belirlenen bir aralıktaki sayısal girişi gecerli olarak alır.
 def get_input(range, message="Lütfen bir işlem numarası giriniz:"):
     while True:
         try:
@@ -25,6 +25,7 @@ def get_input(range, message="Lütfen bir işlem numarası giriniz:"):
         except ValueError:
             print("lütfen gecerli bir deger giriniz")
 
+# Menu başlıgını yazdırır.
 def menu_header(menu_name):
     clear_screen()
     global menu_width
@@ -33,6 +34,7 @@ def menu_header(menu_name):
     print(f"\033[1;33m"+ menu_name.center(menu_width)+f"\033[0m")
     print(menu_width*'-')
 
+# Ana menuyu yazdırır.
 def show_main_menu():
     menu_name = "Movie Library"
     menu_header(menu_name)
@@ -48,6 +50,7 @@ def show_main_menu():
     clear_screen()
     return selection
 
+# Film listesinden sıra numarası girilen filmi silme, dğzenleme islemleri icin secerek filmin adını döndürür.
 def select_movie(message):
     movie_list = []
 
@@ -64,7 +67,7 @@ def select_movie(message):
     else:
         return None
 
-
+# Düzenlenecek filmin detaylarını gösterir.
 def show_movie_details(movie):
     menu_name = movie + " - Movie Details"
     menu_header(menu_name)
@@ -77,6 +80,7 @@ def show_movie_details(movie):
 
     print(menu_width*'-')
 
+# Seçilen filmin düzenlenmesinmi sağlar.
 def change_details(movie):
     print(f"\n\nEditing movie: {movie}")
     info = movies[movie]
@@ -101,8 +105,17 @@ def change_details(movie):
     print("Movie edited successfully!")
     input("Press Enter to continue...")
 
+def edit_movie():
+    menu_name = "Edit Movie"
+    menu_header(menu_name)
+    message = "Düzenlemek istediğiniz filmin numarasını giriniz, vazgeçmek için 0'a basınsınız :"
+    movie = select_movie(message)
+        
+    if movie != None:
+        show_movie_details(movie)
+        change_details(movie)
 
-    
+ # Seçilen filmin silinnmesinmi sağlar.   
 def delete_movie():
     menu_name = "Delete Movie"
     menu_header(menu_name)
@@ -115,16 +128,6 @@ def delete_movie():
             update_movies_json(movies)
             print("Movie deleted successfully!")
             input("Press Enter to continue...")
-
-def edit_movie():
-    menu_name = "Edit Movie"
-    menu_header(menu_name)
-    message = "Düzenlemek istediğiniz filmin numarasını giriniz, vazgeçmek için 0'a basınsınız :"
-    movie = select_movie(message)
-        
-    if movie != None:
-        show_movie_details(movie)
-        change_details(movie)
 
 def view_movies():
     menu_name = "View Movies"
