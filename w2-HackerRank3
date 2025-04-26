@@ -1,0 +1,9 @@
+students=[]
+for _ in range(int(input())):
+    name = input()
+    score = float(input())
+    students.append([name,score])
+scores=[i[1] for i in students]
+secondScore=sorted(list( set(scores)))[1]
+for k in sorted([i for i in students if i[1]==secondScore]):
+    print(k[0])
